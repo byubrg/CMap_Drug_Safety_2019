@@ -5,9 +5,13 @@ Contained in file are functions used for
 
 Import your classifier and add respective lines
 """
-from sklearn.neighbors.nearest_centroid import NearestCentroid
+
 from sklearn.model_selection import cross_val_score, StratifiedShuffleSplit
 from sklearn.neural_network import MLPClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors.nearest_centroid import NearestCentroid
+from sklearn.linear_model import SGDClassifier, LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 
 RAND_STATE = 0
 TEST_SIZE = 0.1
@@ -26,6 +30,25 @@ def train_classifier(data, labels, classifier, **kwargs):
     print( sum(scores) / len(scores))
     score = sum(scores) / len(scores)
     return model.fit(data, labels), score
+
+
+def train_rf(data, labels, classifier, **kwargs):
+    if not kwargs:
+        kwargs = {  # Found by parameter optimization in randomforest.py
+            "criterion": 'gini',
+            "min_samples_leaf": 1,
+            "min_samples_split": 5,
+            "n_estimators": 100
+        }
+    return train_classifier(data, labels, RandomForestClassifier, **kwargs)
+
+
+def train_lr(data, labels):
+    return train_classifier(data, labels, LogisticRegression)
+
+
+def train_knn(data,labels, **kwargs):
+    return train_classifier(data,labels, KNeighborsClassifier, **kwargs)
 
 
 def train_nc(data,labels,**kwargs):
