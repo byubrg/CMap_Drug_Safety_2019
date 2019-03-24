@@ -21,3 +21,12 @@ Navigate to our project folder on the super computer
 ```{bash}
 bash setup_env/activate_jupyter_notebook.sh
 ```
+
+
+
+
+#### New update
+
+```{bash}
+ssh -L 8888:localhost:$yourport $username@ssh.fsl.byu.edu
+```

@@ -2,7 +2,7 @@
 
 # navigate to
 cd
-cd Group_Software_1/miniconda/bin
+cd Group_Software/miniconda/bin
 
 source activate jupyter_env
 
